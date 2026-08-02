@@ -70,22 +70,22 @@ export default function RaceDetail() {
       </p>
 
       {podium.length === 3 && (
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
           {[podium[1], podium[0], podium[2]].map((r, i) => {
             const order = [2, 1, 3][i]
             const medal = order === 1 ? '🥇' : order === 2 ? '🥈' : '🥉'
             return (
               <div
                 key={r.id}
-                className={`rounded-lg border border-white/10 bg-[#15171c] p-4 text-center ${
+                className={`rounded-lg border border-white/10 bg-[#15171c] p-2 sm:p-4 text-center ${
                   order === 1 ? 'sm:scale-105' : ''
                 }`}
               >
-                <p className="text-3xl mb-1">{medal}</p>
-                <p className="font-semibold text-white text-sm">
+                <p className="text-2xl sm:text-3xl mb-1">{medal}</p>
+                <p className="font-semibold text-white text-xs sm:text-sm leading-tight">
                   {r.drivers?.given_name} {r.drivers?.family_name}
                 </p>
-                <p className="text-xs text-neutral-400">{r.constructors?.name}</p>
+                <p className="text-[11px] sm:text-xs text-neutral-400">{r.constructors?.name}</p>
               </div>
             )
           })}
@@ -102,7 +102,7 @@ export default function RaceDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section>
           <h2 className="text-sm font-bold uppercase tracking-wide text-neutral-400 mb-2">Risultati gara</h2>
-          <div className="rounded-lg border border-white/10 overflow-hidden">
+          <div className="rounded-lg border border-white/10 overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-white/5 text-neutral-400 text-xs uppercase">
                 <tr>
@@ -132,7 +132,7 @@ export default function RaceDetail() {
           <h2 className="text-sm font-bold uppercase tracking-wide text-neutral-400 mb-2">
             Classifica piloti dopo la gara
           </h2>
-          <div className="rounded-lg border border-white/10 overflow-hidden mb-6">
+          <div className="rounded-lg border border-white/10 overflow-x-auto mb-6">
             <table className="w-full text-sm">
               <thead className="bg-white/5 text-neutral-400 text-xs uppercase">
                 <tr>
@@ -158,7 +158,7 @@ export default function RaceDetail() {
           {qualifying.length > 0 && (
             <>
               <h2 className="text-sm font-bold uppercase tracking-wide text-neutral-400 mb-2">Qualifiche</h2>
-              <div className="rounded-lg border border-white/10 overflow-hidden">
+              <div className="rounded-lg border border-white/10 overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="bg-white/5 text-neutral-400 text-xs uppercase">
                     <tr>

@@ -37,6 +37,19 @@ I due workflow n8n sono già pubblicati e schedulati:
 
 Per generare subito nuovi contenuti dopo una gara, basta eseguire manualmente i due workflow da n8n nell'ordine sopra.
 
+## Deploy su Netlify
+
+Il repo include `netlify.toml` alla radice (base dir `dashboard`, build `npm run build`, publish `dist`, redirect SPA per React Router). Passi:
+
+1. Su [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project** → collega il repo GitHub `corinbg/F1`, branch `claude/f1-instagram-dashboard-g41as6` (o `main` dopo il merge).
+2. Netlify legge `netlify.toml` in automatico (base dir, build command, publish dir già impostati). Se preferisci impostarli a mano nella UI: Base directory `dashboard`, Build command `npm run build`, Publish directory `dashboard/dist`.
+3. In **Site settings → Environment variables** aggiungi le due variabili (valori in `dashboard/.env.example`):
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+4. Deploy. Ad ogni push su quel branch Netlify rifà build e deploy automaticamente.
+
+La app è già responsive (mobile-first: nav, bacheca, editor e tabelle si adattano a schermi piccoli) e funziona come una normale pagina web su telefono; se vuoi anche l'icona "aggiungi a schermata Home" te lo posso aggiungere (manifest PWA), ma non è incluso di default in questa versione.
+
 ## Note di sicurezza / limiti noti
 
 - Le tabelle dati F1 (`races`, `drivers`, ecc.) hanno RLS con lettura pubblica e scrittura pubblica (necessaria perché n8n scrive con la stessa anon key, senza credenziali service_role). Va bene per un tool interno single-tenant senza login; se in futuro la dashboard diventa pubblica o multi-utente, conviene spostare le scritture di n8n su una chiave `service_role` (da configurare come credenziale in n8n) e restringere le policy di scrittura sulle tabelle dati al solo `service_role`.
