@@ -43,6 +43,7 @@ export interface Result {
   laps: number | null
   fastest_lap_rank: number | null
   fastest_lap_time: string | null
+  fastest_lap_avg_speed: number | null
   drivers?: Pick<Driver, 'given_name' | 'family_name' | 'code'>
   constructors?: Pick<Constructor, 'name' | 'color'>
 }
